@@ -1,7 +1,10 @@
 === Plugin Name ===
 Contributors: Lord Linus
-Tags: contact form
+Tags: contact form, Lord Linus, contact us
 Requires at least: 2.0.2
+Stable tag: 0.9
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Contact Us form generates a custom contact form on your website page, or post. 
 
