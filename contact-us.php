@@ -1,7 +1,7 @@
 <?php
 /* 	Plugin Name: Contact Us By Lord Linus
 	Plugin Uri: http://businessadwings.com
-	Description: This plugin gives you the facility to add a good contact form on your site with a simple shortcode
+	Description: This plugin gives you the facility to add a good contact form on your site with a simple shortcode [LORDLINUS_CONTACT_FORM]
 	Version: 0.8
 	Author: Lord Linus
 	Author URI: http://businessadwings.com/contact-us
@@ -9,10 +9,17 @@
 */
 ?>
 <?php
+
+register_activation_hook( __FILE__, 'InstallScript' );
+function InstallScript()
+{
+	include('install-script.php');
+}
 function contect_us_menu()
 {
 
 	add_menu_page( 'contact-us', 'Contact Us', 'administrator', __FILE__, 'contect_us', plugins_url('/sms.png',__FILE__),3);
+	
 }
 function contect_us()
 {
@@ -208,6 +215,7 @@ function contact_form_shorcode()
 }
 class contact_class
 {
+	
 	var $cuf_script_printed = 0;
 	function contact_show_form($params = '')
 	{
@@ -334,6 +342,7 @@ class contact_class
 	}
 	function sendMail( $n = '', $params = '' )
 	{
+		global $wpdb;
 		$o = get_option('lorlinus_contact_us_form');
 		$result = '';
 		$to = $o['to_email'];
@@ -350,7 +359,9 @@ class contact_class
 			if ( strpos( $k, 'cuf_field_') !== false )
 				$extra .= $o[substr($k, 4, 7)].": $f\r\n";
 		
-
+		$contact_form_query = "INSERT INTO `Lord_linus_contact_form` ( `id`, `name`, `email`, `subject`,`message`, `other-fields`)
+								values ('','$name','$email','$subject','$msg','$extra')";
+		$wpdb->query($contact_form_query);
 		$headers =
 		"MIME-Version: 1.0\r\n".
 		"Reply-To: \"$name\" <$email>\r\n".

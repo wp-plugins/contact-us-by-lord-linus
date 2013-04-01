@@ -26,3 +26,7 @@ Here is what you need to do:
 
 = 0.8 =
 * First Version.
+
+= 0.9 = 
+* Install Script Added
+* Store data into database
