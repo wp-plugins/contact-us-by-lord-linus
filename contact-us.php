@@ -64,7 +64,7 @@ if ( isset($_POST['save']) )
 		<h3><?php echo "Options"; ?></h3>
 		<div class="inside">
 		
-		<form action="?page=contact-us/contact-us.php" method="post">
+		<form action="?page=contact-us-by-lord-linus/contact-us.php" method="post">
 	    <table class="form-table">
 	    		<tr>
 		
