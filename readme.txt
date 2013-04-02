@@ -24,9 +24,9 @@ Here is what you need to do:
 
 == Changelog ==
 
-= 0.8 =
-* First Version.
-
 = 0.9 = 
 * Install Script Added
 * Store data into database
+
+= 0.8 =
+* First Version.
