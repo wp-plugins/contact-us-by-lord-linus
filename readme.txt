@@ -2,7 +2,7 @@
 Contributors: Lord Linus
 Tags: contact form, Lord Linus, contact us
 Requires at least: 2.0.2
-Stable tag: 0.9
+Stable tag: 0.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,9 +27,16 @@ Here is what you need to do:
 
 == Changelog ==
 
-= 0.9 =
-* First Version.
+= 0.9.2 =
+1. Small bugs resolved
+2. readme.txt
 
-= 0.8 = 
-* Install Script Added
-* Store data into database
+= 0.9.1 =
+1. Database Connectivity
+2. UI Revamped 
+
+= 0.9 =
+1. Bux Fixes
+
+= 0.8 =
+This version provides basic functionality to use contact form.
