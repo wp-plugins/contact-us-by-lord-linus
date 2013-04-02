@@ -2,7 +2,7 @@
 Contributors: Lord Linus
 Tags: contact form, Lord Linus, contact us
 Requires at least: 2.0.2
-Stable tag: 0.9.2
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,10 @@ Here is what you need to do:
 1. If you are not recieving emails, you may need to turn off Allow Comments on the page where you place [LORDLINUS_CONTACT_FORM].  
 
 == Changelog ==
+
+= 1.0 =
+1. Small bugs resolved
+2. readme.txt
 
 = 0.9.2 =
 1. Small bugs resolved
