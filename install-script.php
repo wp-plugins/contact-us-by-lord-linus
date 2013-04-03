@@ -7,7 +7,7 @@ $contactform_sql = "CREATE TABLE IF NOT EXISTS `Lord_linus_contact_form` (
   `email` varchar(256) NOT NULL,
   `subject` varchar(256) NOT NULL,
   `message` varchar(256) NOT NULL,
-  `other-fields` varchar(256) NOT NULL,
+  `other_fields` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
 );";
 $wpdb->query($contactform_sql); 

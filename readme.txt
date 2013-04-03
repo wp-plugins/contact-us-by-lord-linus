@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: Lord Linus
-Tags: contact form, Lord Linus, contact us
+Tags: contact form, Lord Linus, contact us, contact, contact us by lord linus
 Requires at least: 2.0.2
 Stable tag: 1.0
 License: GPLv2 or later
@@ -26,6 +26,10 @@ Here is what you need to do:
 1. If you are not recieving emails, you may need to turn off Allow Comments on the page where you place [LORDLINUS_CONTACT_FORM].  
 
 == Changelog ==
+
+= 1.2 =
+1. Added install and uninstall script
+2. Show entries on admin dashboard
 
 = 1.0 =
 1. Small bugs resolved
