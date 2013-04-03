@@ -1,14 +1,4 @@
 <?php
-/* 	Plugin Name: Contact Us By Lord Linus
-	Plugin Uri: http://businessadwings.com
-	Description: This plugin gives you the facility to add a good contact form on your site with a simple shortcode [LORDLINUS_CONTACT_FORM]
-	Version: 1.2
-	Author: Lord Linus
-	Author URI: http://businessadwings.com/contact-us
-	Licence: GPVl
-*/
-?>
-<?php
 
 register_activation_hook( __FILE__, 'Contact_InstallScript' );
 function Contact_InstallScript()
