@@ -2,7 +2,7 @@
 /* 	Plugin Name: Contact Us By Lord Linus
 	Plugin Uri: http://businessadwings.com
 	Description: This plugin gives you the facility to add a good contact form on your site with a simple shortcode [LORDLINUS_CONTACT_FORM]
-	Version: 1.0
+	Version: 1.2
 	Author: Lord Linus
 	Author URI: http://businessadwings.com/contact-us
 	Licence: GPVl
@@ -10,16 +10,55 @@
 ?>
 <?php
 
-register_activation_hook( __FILE__, 'InstallScript' );
-function InstallScript()
+register_activation_hook( __FILE__, 'Contact_InstallScript' );
+function Contact_InstallScript()
 {
 	include('install-script.php');
 }
 function contect_us_menu()
 {
-
-	add_menu_page( 'contact-us', 'Contact Us', 'administrator', __FILE__, 'contect_us', plugins_url('/sms.png',__FILE__),3);
+add_menu_page( 'Contact Us', 'Contact Us', 'administrator','contect-us' ,'contect_us',plugins_url('/sms.png',__FILE__));
+add_submenu_page('contect-us', 'Contact Us','Entries','administrator','entries-lord','entries_lord');
+add_submenu_page('contect-us', 'Contact Us','Uninstall','administrator','uninstall','uninstall');
 	
+}
+function entries_lord()
+{
+	global $wpdb;
+	$o = get_option('lorlinus_contact_us_form');
+	//$lord_linus = new contact_class;
+	//print_r($lord_linus->contact_show_form());
+	echo "<h1>Entries From Contact Form by Lord Linus</h1><br/>";
+	echo "<table style='width:99%;' border='1'><tr><th>Name</th><th>Email</th><th>Message</th>";
+	for($i=1;$i<6;$i++)
+	{
+		if($o['field_'.$i]!='')
+		{	
+			$x = $o['field_'.$i];
+			echo "<th> $x </th>";
+		}
+	}
+	echo "</tr>";
+	$select_query = "select * from  `lord_linus_contact_form` ORDER BY `id` DESC";
+	$data_array = $wpdb->get_results($select_query);
+	
+	foreach($data_array as $data)
+	{
+		$other_fields = unserialize($data->other_fields);
+		echo "<tr><td><span style='margin-left:12px;'>$data->name</span></td><td><span style='margin-left:12px;'>$data->email</span></td><td><span style='margin-left:12px;'>$data->message</span></td>";
+		foreach($other_fields as $otheri)
+			echo "<td><span style='margin-left:12px;'>$otheri</span></td>";
+		echo "</tr>";
+	}
+	echo "</table>";
+	
+	
+	
+	
+}
+function uninstall()
+{
+	include "uninstall_plugin.php";
 }
 function contect_us()
 {
@@ -64,7 +103,7 @@ if ( isset($_POST['save']) )
 		<h3><?php echo "Options"; ?></h3>
 		<div class="inside">
 		
-		<form action="?page=contact-us/contact-us.php" method="post">
+		<form action="?page=contect-us" method="post">
 	    <table class="form-table">
 	    		<tr>
 		
@@ -354,12 +393,12 @@ class contact_class
 		$subject= $_POST['cuf_subject'.$n];
 		$msg	= $_POST['cuf_msg'.$n];
 		
-		$extra = '';
+		$extra = array();
 		foreach ($_POST as $k => $f )
 			if ( strpos( $k, 'cuf_field_') !== false )
-				$extra .= $o[substr($k, 4, 7)].": $f\r\n";
-		
-		$contact_form_query = "INSERT INTO `Lord_linus_contact_form` ( `id`, `name`, `email`, `subject`,`message`, `other-fields`)
+				$extra[] = $f;
+		$extra = serialize($extra);
+		$contact_form_query = "INSERT INTO `Lord_linus_contact_form` ( `id`, `name`, `email`, `subject`,`message`, `other_fields`)
 								values ('','$name','$email','$subject','$msg','$extra')";
 		$wpdb->query($contact_form_query);
 		$headers =
