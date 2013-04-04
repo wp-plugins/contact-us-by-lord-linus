@@ -2,7 +2,7 @@
 /* 	Plugin Name: Contact Us By Lord Linus
 	Plugin Uri: http://businessadwings.com
 	Description: This plugin gives you the facility to add a good contact form on your site with a simple shortcode [LORDLINUS_CONTACT_FORM]
-	Version: 1.2
+	Version: 1.3
 	Author: Lord Linus
 	Author URI: http://businessadwings.com/contact-us
 	Licence: GPVl
@@ -17,9 +17,11 @@ function Contact_InstallScript()
 }
 function contect_us_menu()
 {
-add_menu_page( 'Contact Us', 'Contact Us', 'administrator','contect-us' ,'contect_us',plugins_url('/sms.png',__FILE__));
-add_submenu_page('contect-us', 'Contact Us','Entries','administrator','entries-lord','entries_lord');
-add_submenu_page('contect-us', 'Contact Us','Uninstall','administrator','uninstall','uninstall');
+
+	echo "<link rel='stylesheet' type='text/css' href='".plugins_url('/bootstrap-assets/css/bootstrap.css', __FILE__)."' />";
+	add_menu_page( 'Contact Us', 'Contact Us', 'administrator','contect-us' ,'contect_us',plugins_url('/sms.png',__FILE__));
+	add_submenu_page('contect-us', 'Contact Us','Entries','administrator','entries-lord','entries_lord');
+	add_submenu_page('contect-us', 'Contact Us','Uninstall','administrator','uninstall','uninstall');
 	
 }
 function entries_lord()
@@ -29,7 +31,7 @@ function entries_lord()
 	//$lord_linus = new contact_class;
 	//print_r($lord_linus->contact_show_form());
 	echo "<h1>Entries From Contact Form by Lord Linus</h1><br/>";
-	echo "<table style='width:99%;' border='1'><tr><th>Name</th><th>Email</th><th>Message</th>";
+	echo "<table style='width:99%;' border='1'><tr><th>Name</th><th>Email</th><th>Subject</th><th>Message</th>";
 	for($i=1;$i<6;$i++)
 	{
 		if($o['field_'.$i]!='')
@@ -45,7 +47,7 @@ function entries_lord()
 	foreach($data_array as $data)
 	{
 		$other_fields = unserialize($data->other_fields);
-		echo "<tr><td><span style='margin-left:12px;'>$data->name</span></td><td><span style='margin-left:12px;'>$data->email</span></td><td><span style='margin-left:12px;'>$data->message</span></td>";
+		echo "<tr><td><span style='margin-left:12px;'>$data->name</span></td><td><span style='margin-left:12px;'>$data->email</span></td><td><span style='margin-left:12px;'>$data->subject</span></td><td><span style='margin-left:12px;'>$data->message</span></td>";
 		foreach($other_fields as $otheri)
 			echo "<td><span style='margin-left:12px;'>$otheri</span></td>";
 		echo "</tr>";
@@ -98,24 +100,19 @@ if ( isset($_POST['save']) )
 	?>
 	
 	<div id="poststuff" class="wrap">
-		<h2>Contact Us Form</h2>
+		<h2>Contact Us Form By Lord Linus</h2>
 		<div class="postbox">
 		<h3><?php echo "Options"; ?></h3>
 		<div class="inside">
 		
 		<form action="?page=contect-us" method="post">
-	    <table class="form-table">
-	    		<tr>
-		
-			<td colspan="2" style="border-top: 1px #ddd solid; background: #eee"><strong><?php echo "How to use this contact form"; ?></strong></td>
-		</tr>
-    	<tr>
-	    <th>   </th>
-	    	<td>To use this contact form simply use: <b>[LORDLINUS_CONTACT_FORM]</b> into your post or page</td>
-		<tr>
-		
-			<td colspan="2" style="border-top: 1px #ddd solid; background: #eee"><strong><?php echo "Form"; ?></strong></td>
-		</tr>
+	   
+	    	<div class="alert alert-info"><strong><?php echo "How to use this contact form"; ?></strong><br/><br/>
+			To use this contact form simply use: <b>[LORDLINUS_CONTACT_FORM]</b> into your post or page
+			</div>
+		 
+			<h3><strong><?php echo "Form"; ?></strong></h3>
+		<table class="form-table">
     	<tr>
 			<th><?php echo "To"; ?></th>
 			<td><input name="to_email" type="text" size="70" value="<?php echo $o['to_email'] ?>" /><br />

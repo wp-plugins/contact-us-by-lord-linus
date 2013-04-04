@@ -6,7 +6,7 @@ if(isset($_POST['uninstallapcal']))
 	$wpdb->query($query);
 	
 	delete_option('lorlinus_contact_us_form');
-	$plugin = "contact-us-by-lord-linus/contact-us-by-lord-linus.php";
+	$plugin = "contact-us-by-lord-linus/contact-us.php";
 	deactivate_plugins($plugin);
 	?>
 	<div class="alert" style="width:95%; margin-top:10px;">

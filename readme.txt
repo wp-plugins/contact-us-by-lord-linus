@@ -2,7 +2,7 @@
 Contributors: Lord Linus
 Tags: contact form, Lord Linus, contact us, contact, contact us by lord linus
 Requires at least: 2.0.2
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,7 +25,16 @@ Here is what you need to do:
 1. Insert [LORDLINUS_CONTACT_FORM] shortcode in any post, page or widget, you can also use this markup'
 1. If you are not recieving emails, you may need to turn off Allow Comments on the page where you place [LORDLINUS_CONTACT_FORM].  
 
+== Screenshots ==
+
+1. Contact Us Form on a page
+2. Entries into admin dashboard
+
 == Changelog ==
+
+= 1.3 =
+1. UI Revamped
+2. Added Uninstall script
 
 = 1.2 =
 1. Added install and uninstall script
