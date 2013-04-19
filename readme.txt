@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: Lord Linus
+Contributors: lordlinus
 Tags: contact form, Lord Linus, contact us, contact, contact us by lord linus
 Requires at least: 2.0.2
 Stable tag: 1.4
