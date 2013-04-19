@@ -3,7 +3,7 @@
 	Plugin Uri: http://businessadwings.com
 	Description: This plugin gives you the facility to add a good contact form on your site with a simple shortcode [LORDLINUS_CONTACT_FORM]
 	Version: 1.3
-	Author: Lord Linus
+	Author: lordlinus
 	Author URI: http://businessadwings.com/contact-us
 	Licence: GPVl
 */
