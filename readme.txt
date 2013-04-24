@@ -1,8 +1,8 @@
 === Plugin Name ===
-Contributors: lordlinus
+Contributors: Lord Linus
 Tags: contact form, Lord Linus, contact us, contact, contact us by lord linus
 Requires at least: 2.0.2
-Stable tag: 1.3
+Stable tag: 1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,6 +23,7 @@ Here is what you need to do:
 1. Go to your plugin settings and enable the plugin.
 1. In the sidebar you will have a new section called 'Contact Us' navigate there and set your preferences.
 1. Insert [LORDLINUS_CONTACT_FORM] shortcode in any post, page or widget, you can also use this markup'
+1. Insert [LORDLINUS_CONTACT_WIDGET] shortcode to your widget, a contact us menu will be float on left side:
 1. If you are not recieving emails, you may need to turn off Allow Comments on the page where you place [LORDLINUS_CONTACT_FORM].  
 
 == Screenshots ==
@@ -31,6 +32,8 @@ Here is what you need to do:
 2. Entries into admin dashboard
 
 == Changelog ==
+= 1.4 =
+1. Added new Shortcode [LORDLINUS_CONTACT_WIDGET]
 
 = 1.3 =
 1. UI Revamped

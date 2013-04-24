@@ -2,8 +2,8 @@
 /* 	Plugin Name: Contact Us By Lord Linus
 	Plugin Uri: http://businessadwings.com
 	Description: This plugin gives you the facility to add a good contact form on your site with a simple shortcode [LORDLINUS_CONTACT_FORM]
-	Version: 1.3
-	Author: lordlinus
+	Version: 1.6
+	Author: Lord Linus
 	Author URI: http://businessadwings.com/contact-us
 	Licence: GPVl
 */
@@ -249,6 +249,25 @@ function contact_form_shorcode()
 	$lord_linus = new contact_class;
 	print_r($lord_linus->contact_show_form());
 }
+add_shortcode('LORDLINUS_CONTACT_WIDGET','contact_form_widget');
+function contact_form_widget()
+{
+
+	echo "<style>#support_btn {top: 50%!important;background: #FECC33!important;border-radius: 0px 0px 7px 7px;font-family: Arial, Helvetica, sans-serif;border: solid 2px #fff;margin: 0;cursor: pointer;overflow: hidden;position: fixed;height: 25px;min-width: 110px;z-index: 10000;white-space: nowrap;padding: 0 10px 35px 10px;}#support_btn:hover {background:#F7D55B!important}#support_btn #middle_left_text {float: left;font-size: 22px;font-weight: bold;text-align: center;color: #444;letter-spacing: 1px;margin-top: 25px;margin-left: 10px;text-decoration:none;}#support_btn.middle_left {left: -50px;background-position: right 0;-webkit-transform: rotate(-90deg);-moz-transform: rotate(-90deg);-o-transform: rotate(-90deg);-ms-transform: rotate(-90deg);transform: rotate(-90deg);}</style> ";
+	echo "<div class='middle_left' id='support_btn'><div id='middle_left_text'><a href='#ex1' rel='modal:open'>Contact Us</a></div></div>";
+	?>
+	<div class='modal' id='ex1' style='display:none;'>
+	<?php
+	$lord_linus = new contact_class;
+	echo "<input type='hidden' name='modal' value='xyz'>";
+	print_r($lord_linus->contact_show_form());
+	?>
+	</div>
+	<?php
+	echo "<link rel='stylesheet' type='text/css' href='".plugins_url('/bootstrap-assets/css/jquery.modal.css', __FILE__)."' />";
+	echo "<script src='".plugins_url('/bootstrap-assets/css/jquery.modal.min.js', __FILE__)."' />";
+
+}
 class contact_class
 {
 	
@@ -262,9 +281,9 @@ class contact_class
 		
 		$o = get_option('lorlinus_contact_us_form');
 		$form = '<div class="contactform" id="cuform'.$n.'">';
-		
 		if ( !empty($result) )
 		{
+			
 			if ( $result == $this->o['msg_ok'] )
 
 				$form .= '<p class="contactform_respons">'.$result.'</p>';
@@ -429,6 +448,7 @@ class contact_class
 						unset($k);
 			}
 			$result = $o['msg_ok'];
+			
 		}
 		else
 			$result = $o['msg_err'];
