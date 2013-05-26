@@ -2,7 +2,7 @@
 /* 	Plugin Name: Contact Us By Lord Linus
 	Plugin Uri: http://businessadwings.com
 	Description: This plugin gives you the facility to add a good contact form on your site with a simple shortcode [LORDLINUS_CONTACT_FORM]
-	Version: 1.6
+	Version: 1.3
 	Author: Lord Linus
 	Author URI: http://businessadwings.com/contact-us
 	Licence: GPVl
@@ -311,7 +311,7 @@ class contact_class
 			$cuf_msg = (isset($_POST['cuf_msg'.$n])) ? $_POST['cuf_msg'.$n] : '';
 			
 			$form .= '
-				<form action="#cuform'.$n.'" method="post" id="tinyform'.$n.'">
+				<form action="" method="post" id="tinyform'.$n.'">
 				<div>
 				<label for="cuf_sender'.$n.'" class="cuf_label"> Name :</label>
 				<input name="cuf_sender'.$n.'" id="cuf_sender'.$n.'" size="30" value="'.$cuf_sender.'" class="cuf_field" />

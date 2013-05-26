@@ -254,7 +254,7 @@ class contact_class
 		$result = $this->sendMail( $n, $params );
 		
 		$o = get_option('lorlinus_contact_us_form');
-		$form = '<div class="contactform" id="cuform'.$n.'">';
+		$form = '<div class="contactform" id="">';
 		
 		if ( !empty($result) )
 		{
@@ -285,7 +285,7 @@ class contact_class
 			$cuf_msg = (isset($_POST['cuf_msg'.$n])) ? $_POST['cuf_msg'.$n] : '';
 			
 			$form .= '
-				<form action="#cuform'.$n.'" method="post" id="tinyform'.$n.'">
+				<form action="" method="post" id="tinyform'.$n.'">
 				<div>
 				<label for="cuf_sender'.$n.'" class="cuf_label"> Name :</label>
 				<input name="cuf_sender'.$n.'" id="cuf_sender'.$n.'" size="30" value="'.$cuf_sender.'" class="cuf_field" />
