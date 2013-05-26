@@ -2,7 +2,7 @@
 Contributors: Lord Linus
 Tags: contact form, Lord Linus, contact us, contact, contact us by lord linus
 Requires at least: 2.0.2
-Stable tag: 1.6
+Stable tag: 1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,8 @@ Here is what you need to do:
 2. Entries into admin dashboard
 
 == Changelog ==
+= 1.7 =
+1. updated some code
 = 1.4 =
 1. Added new Shortcode [LORDLINUS_CONTACT_WIDGET]
 
