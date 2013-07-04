@@ -1,8 +1,8 @@
 === Plugin Name ===
-Contributors: Lord Linus
-Tags: contact form, Lord Linus, contact us, contact, contact us by lord linus
+Contributors: lordlinus
+Tags: contact form, Lord Linus, contact us, contact, contact us by lord linus, contact form with facebook
 Requires at least: 2.0.2
-Stable tag: 1.7
+Stable tag: 1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,8 +32,12 @@ Here is what you need to do:
 2. Entries into admin dashboard
 
 == Changelog ==
+= 1.8 =
+1. Now add this contact form page to your facebook fan page
+
 = 1.7 =
 1. updated some code
+
 = 1.4 =
 1. Added new Shortcode [LORDLINUS_CONTACT_WIDGET]
 
