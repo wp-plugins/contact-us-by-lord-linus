@@ -1,15 +1,14 @@
 <?php
 /* 	Plugin Name: Contact Us By Lord Linus
-	Plugin Uri: http://businessadwings.com
+	Plugin Uri: http://rohitashv.wordpress.com
 	Description: This plugin gives you the facility to add a good contact form on your site with a simple shortcode [LORDLINUS_CONTACT_FORM]
-	Version: 1.7
-	Author: Lord Linus
+	Version: 2.0
+	Author: lordlinus
 	Author URI: http://businessadwings.com/contact-us
 	Licence: GPVl
 */
 ?>
 <?php
-
 register_activation_hook( __FILE__, 'Contact_InstallScript' );
 function Contact_InstallScript()
 {
@@ -17,46 +16,105 @@ function Contact_InstallScript()
 }
 function contect_us_menu()
 {
-
 	echo "<link rel='stylesheet' type='text/css' href='".plugins_url('/bootstrap-assets/css/bootstrap.css', __FILE__)."' />";
 	add_menu_page( 'Contact Us', 'Contact Us', 'administrator','contect-us' ,'contect_us',plugins_url('/sms.png',__FILE__));
 	add_submenu_page('contect-us', 'Contact Us','Entries','administrator','entries-lord','entries_lord');
 	add_submenu_page('contect-us', 'Contact Us','Uninstall','administrator','uninstall','uninstall');
+	add_submenu_page('contect-us', 'Contact Us','Embed on Facebook','administrator','facebookembd','facebookembd');
 	
+}
+function facebookembd()
+{
+	include "facebookembd.php";
 }
 function entries_lord()
 {
 	global $wpdb;
+	//include("pagination.class.php");
 	$o = get_option('lorlinus_contact_us_form');
 	//$lord_linus = new contact_class;
 	//print_r($lord_linus->contact_show_form());
-	echo "<h1>Entries From Contact Form by Lord Linus</h1><br/>";
-	echo "<table style='width:99%;' border='1'><tr><th>Name</th><th>Email</th><th>Subject</th><th>Message</th>";
-	for($i=1;$i<6;$i++)
-	{
-		if($o['field_'.$i]!='')
-		{	
-			$x = $o['field_'.$i];
-			echo "<th> $x </th>";
+	$items = mysql_num_rows(mysql_query("SELECT * FROM lord_linus_contact_form;"));
+	
+	if($items > 0) {
+			$p = new pagination;
+			$p->items($items);
+			$p->limit(10); // Limit entries per page
+			$p->target("admin.php?page=entries-lord");
+			$p->currentPage($_GET[$p->paging]); // Gets and validates the current page
+			$p->calculate(); // Calculates what to show
+			$p->parameterName('paging');
+			$p->adjacents(1); //No. of page away from the current page
+					 
+			if(!isset($_GET['paging'])) {
+				$p->page = 1;
+			} else {
+				$p->page = $_GET['paging'];
+			}
+			 
+			//Query for limit paging
+			$limit = "LIMIT " . ($p->page - 1) * $p->limit  . ", " . $p->limit;
+			 
+	} else {
+		echo "No Record Found";
+	}
+?>
+ 
+<div class="wrap">
+    <h2>List of Contacts who sent you messages</h2>
+ 
+ 
+<table class="widefat">
+<thead>
+   <tr><th>Sr no</th><th>Name</th><th>Email</th><th>Message</th>
+        <?php
+		for($i=1;$i<6;$i++)
+		{
+			if($o['field_'.$i]!='')
+			{	
+				$x = $o['field_'.$i];
+				echo "<th> $x </th>";
+			}
 		}
-	}
-	echo "</tr>";
-	$select_query = "select * from  `lord_linus_contact_form` ORDER BY `id` DESC";
-	$data_array = $wpdb->get_results($select_query);
+		?>
+    </tr>
+</thead>
+<tbody>
+ <?php
+$sql = "SELECT *  FROM `lord_linus_contact_form` ORDER BY id DESC $limit";
+$result = mysql_query($sql) or die ('Error, query failed');
+ 
+if (mysql_num_rows($result) > 0 ) {
+	$id = 0;
+    while ($row = mysql_fetch_assoc($result)) {
+            $id             = $id+1;
+            $fullname  = $row['name'];
+            $email       = $row['email'];
+			$message = $row['message'];
+ ?>
+        <tr style="height:35px;">
+            <td><?php echo $id; ?></td>
+            <td><?php echo $fullname; ?></td>
+            <td><?php echo $email; ?></td>
+			<td><?php echo $message; ?></td>
+        </tr>
+<?php }
+} else { ?>
+        <tr>
+        <td>No Record Found!</td>
+        <tr> 
+<?php } ?>
+</tbody>
+</table>
+
+<div class="tablenav">
+    <div class='tablenav-pages'>
+        <?php echo $p->show();  // Echo out the list of paging. ?>
+    </div>
+</div>
+</div>
 	
-	foreach($data_array as $data)
-	{
-		$other_fields = unserialize($data->other_fields);
-		echo "<tr><td><span style='margin-left:12px;'>$data->name</span></td><td><span style='margin-left:12px;'>$data->email</span></td><td><span style='margin-left:12px;'>$data->subject</span></td><td><span style='margin-left:12px;'>$data->message</span></td>";
-		foreach($other_fields as $otheri)
-			echo "<td><span style='margin-left:12px;'>$otheri</span></td>";
-		echo "</tr>";
-	}
-	echo "</table>";
-	
-	
-	
-	
+<?php	
 }
 function uninstall()
 {
