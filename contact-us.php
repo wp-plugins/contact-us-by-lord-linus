@@ -2,7 +2,7 @@
 /* 	Plugin Name: Contact Us By Lord Linus
 	Plugin Uri: http://rohitashv.wordpress.com
 	Description: This plugin gives you the facility to add a good contact form on your site with a simple shortcode [LORDLINUS_CONTACT_FORM]
-	Version: 2.0
+	Version: 2.1
 	Author: lordlinus
 	Author URI: http://businessadwings.com/contact-us
 	Licence: GPVl
@@ -88,9 +88,9 @@ if (mysql_num_rows($result) > 0 ) {
 	$id = 0;
     while ($row = mysql_fetch_assoc($result)) {
             $id             = $id+1;
-            $fullname  = $row['name'];
-            $email       = $row['email'];
-			$message = $row['message'];
+            $fullname  = htmlentities($row['name']);
+            $email       = htmlentities($row['email']);
+			$message = htmlentities($row['message']);
  ?>
         <tr style="height:35px;">
             <td><?php echo $id; ?></td>
@@ -125,13 +125,13 @@ function contect_us()
 
 if ( isset($_POST['save']) )
 	{
-		$to = stripslashes($_POST['to_email']);
+		$to = htmlentities($_POST['to_email']);
 		if ( empty($to) )
 			$to = get_option('admin_email');
-		$msg_ok = stripslashes($_POST['msg_ok']);
+		$msg_ok = htmlentities($_POST['msg_ok']);
 		if ( empty($msg_ok) )
 			$msg_ok = "Thank you! Your message was sent successfully.";
-		$msg_err = stripslashes($_POST['msg_err']);
+		$msg_err = htmlentities($_POST['msg_err']);
 		if ( empty($msg_err) )
 			$msg_err = "Sorry. An error occured while sending the message!";
 		//$captcha = ( isset($_POST['captcha']) ) ? 1 : 0;
@@ -139,17 +139,17 @@ if ( isset($_POST['save']) )
 		
 		$o = array(
 			'to_email'		=> $to,
-			'from_email'	=> stripslashes($_POST['from_email']),
+			'from_email'	=> htmlentities($_POST['from_email']),
 			'msg_ok'		=> $msg_ok,
 			'msg_err'		=> $msg_err,
-			'submit'		=> stripslashes($_POST['submit']),
+			'submit'		=> htmlentities($_POST['submit']),
 			//'captcha'		=> $captcha,
 			//'captcha_label'	=> stripslashes($_POST['captcha_label']),
-			'field_1'		=> stripslashes($_POST['field_1']),
-			'field_2'		=> stripslashes($_POST['field_2']),
-			'field_3'		=> stripslashes($_POST['field_3']),
-			'field_4'		=> stripslashes($_POST['field_4']),
-			'field_5'		=> stripslashes($_POST['field_5']),
+			'field_1'		=>htmlentities($_POST['field_1']),
+			'field_2'		=> htmlentities($_POST['field_2']),
+			'field_3'		=> htmlentities($_POST['field_3']),
+			'field_4'		=> htmlentities($_POST['field_4']),
+			'field_5'		=> htmlentities($_POST['field_5']),
 			'hideform'			=> $hideform
 			);
 		update_option('lorlinus_contact_us_form', $o);
