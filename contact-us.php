@@ -1,6 +1,6 @@
 <?php
 /* 	Plugin Name: Contact Us By Lord Linus
-	Plugin Uri: http://rohitashv.wordpress.com
+	Plugin Uri: http://businessadwings.com
 	Description: This plugin gives you the facility to add a good contact form on your site with a simple shortcode [LORDLINUS_CONTACT_FORM]
 	Version: 2.1
 	Author: lordlinus
@@ -30,91 +30,36 @@ function facebookembd()
 function entries_lord()
 {
 	global $wpdb;
-	//include("pagination.class.php");
 	$o = get_option('lorlinus_contact_us_form');
 	//$lord_linus = new contact_class;
 	//print_r($lord_linus->contact_show_form());
-	$items = mysql_num_rows(mysql_query("SELECT * FROM lord_linus_contact_form;"));
-	
-	if($items > 0) {
-			$p = new pagination;
-			$p->items($items);
-			$p->limit(10); // Limit entries per page
-			$p->target("admin.php?page=entries-lord");
-			$p->currentPage($_GET[$p->paging]); // Gets and validates the current page
-			$p->calculate(); // Calculates what to show
-			$p->parameterName('paging');
-			$p->adjacents(1); //No. of page away from the current page
-					 
-			if(!isset($_GET['paging'])) {
-				$p->page = 1;
-			} else {
-				$p->page = $_GET['paging'];
-			}
-			 
-			//Query for limit paging
-			$limit = "LIMIT " . ($p->page - 1) * $p->limit  . ", " . $p->limit;
-			 
-	} else {
-		echo "No Record Found";
-	}
-?>
- 
-<div class="wrap">
-    <h2>List of Contacts who sent you messages</h2>
- 
- 
-<table class="widefat">
-<thead>
-   <tr><th>Sr no</th><th>Name</th><th>Email</th><th>Message</th>
-        <?php
-		for($i=1;$i<6;$i++)
-		{
-			if($o['field_'.$i]!='')
-			{	
-				$x = $o['field_'.$i];
-				echo "<th> $x </th>";
-			}
+	echo "<h1>Entries From Contact Form by Lord Linus</h1><br/>";
+	echo "<table style='width:99%;' border='1'><tr><th>Name</th><th>Email</th><th>Subject</th><th>Message</th>";
+	for($i=1;$i<6;$i++)
+	{
+		if($o['field_'.$i]!='')
+		{	
+			$x = $o['field_'.$i];
+			echo "<th> $x </th>";
 		}
-		?>
-    </tr>
-</thead>
-<tbody>
- <?php
-$sql = "SELECT *  FROM `lord_linus_contact_form` ORDER BY id DESC $limit";
-$result = mysql_query($sql) or die ('Error, query failed');
- 
-if (mysql_num_rows($result) > 0 ) {
-	$id = 0;
-    while ($row = mysql_fetch_assoc($result)) {
-            $id             = $id+1;
-            $fullname  = htmlentities($row['name']);
-            $email       = htmlentities($row['email']);
-			$message = htmlentities($row['message']);
- ?>
-        <tr style="height:35px;">
-            <td><?php echo $id; ?></td>
-            <td><?php echo $fullname; ?></td>
-            <td><?php echo $email; ?></td>
-			<td><?php echo $message; ?></td>
-        </tr>
-<?php }
-} else { ?>
-        <tr>
-        <td>No Record Found!</td>
-        <tr> 
-<?php } ?>
-</tbody>
-</table>
-
-<div class="tablenav">
-    <div class='tablenav-pages'>
-        <?php echo $p->show();  // Echo out the list of paging. ?>
-    </div>
-</div>
-</div>
+	}
+	echo "</tr>";
+	$select_query = "select * from  `lord_linus_contact_form` ORDER BY `id` DESC";
+	$data_array = $wpdb->get_results($select_query);
 	
-<?php	
+	foreach($data_array as $data)
+	{
+		$other_fields = unserialize($data->other_fields);
+		echo "<tr><td><span style='margin-left:12px;'>".htmlentities($data->name)."</span></td><td><span style='margin-left:12px;'>".htmlentities($data->email)."</span></td><td><span style='margin-left:12px;'>".htmlentities($data->subject)."</span></td><td><span style='margin-left:12px;'>".htmlentities($data->message)."</span></td>";
+		foreach($other_fields as $otheri)
+			echo "<td><span style='margin-left:12px;'>$otheri</span></td>";
+		echo "</tr>";
+	}
+	echo "</table>";
+	
+	
+	
+	
 }
 function uninstall()
 {
@@ -125,13 +70,13 @@ function contect_us()
 
 if ( isset($_POST['save']) )
 	{
-		$to = htmlentities($_POST['to_email']);
+		$to = stripslashes($_POST['to_email']);
 		if ( empty($to) )
 			$to = get_option('admin_email');
-		$msg_ok = htmlentities($_POST['msg_ok']);
+		$msg_ok = stripslashes($_POST['msg_ok']);
 		if ( empty($msg_ok) )
 			$msg_ok = "Thank you! Your message was sent successfully.";
-		$msg_err = htmlentities($_POST['msg_err']);
+		$msg_err = stripslashes($_POST['msg_err']);
 		if ( empty($msg_err) )
 			$msg_err = "Sorry. An error occured while sending the message!";
 		//$captcha = ( isset($_POST['captcha']) ) ? 1 : 0;
@@ -139,17 +84,17 @@ if ( isset($_POST['save']) )
 		
 		$o = array(
 			'to_email'		=> $to,
-			'from_email'	=> htmlentities($_POST['from_email']),
+			'from_email'	=> stripslashes($_POST['from_email']),
 			'msg_ok'		=> $msg_ok,
 			'msg_err'		=> $msg_err,
-			'submit'		=> htmlentities($_POST['submit']),
+			'submit'		=> stripslashes($_POST['submit']),
 			//'captcha'		=> $captcha,
 			//'captcha_label'	=> stripslashes($_POST['captcha_label']),
-			'field_1'		=>htmlentities($_POST['field_1']),
-			'field_2'		=> htmlentities($_POST['field_2']),
-			'field_3'		=> htmlentities($_POST['field_3']),
-			'field_4'		=> htmlentities($_POST['field_4']),
-			'field_5'		=> htmlentities($_POST['field_5']),
+			'field_1'		=> stripslashes($_POST['field_1']),
+			'field_2'		=> stripslashes($_POST['field_2']),
+			'field_3'		=> stripslashes($_POST['field_3']),
+			'field_4'		=> stripslashes($_POST['field_4']),
+			'field_5'		=> stripslashes($_POST['field_5']),
 			'hideform'			=> $hideform
 			);
 		update_option('lorlinus_contact_us_form', $o);

@@ -2,7 +2,7 @@
 Contributors: lordlinus
 Tags: contact form, Lord Linus, contact us, contact, contact us by lord linus, contact form with facebook
 Requires at least: 2.0.2
-Stable tag: 2.1
+Stable tag: 2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,11 +32,8 @@ Here is what you need to do:
 2. Entries into admin dashboard
 
 == Changelog ==
-= 2.1 =
-1. XSS Problem Removed
-
-= 2.0 =
-1. Pagination available in Entries list
+= 2.5 = 
+Minor Bugs Resolved
 
 = 1.8 =
 1. Now add this contact form page to your facebook fan page
